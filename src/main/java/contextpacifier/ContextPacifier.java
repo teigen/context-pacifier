@@ -97,8 +97,9 @@ public class ContextPacifier {
             Set<String> rules = rewrites.get(localName);
             if(rules != null){
                 for(int i = 0; i < attributes.getLength(); i ++){
-                    if(rules.contains(attributes.getLocalName(i))){
-                        attributes.setValue(i, contextPath + attributes.getValue(i));
+					String value = attributes.getValue(i);
+                    if(rules.contains(attributes.getLocalName(i)) && value.startsWith("/")){
+                        attributes.setValue(i, contextPath + value);
                     }
                 }
             }
